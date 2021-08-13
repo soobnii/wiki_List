@@ -1,0 +1,64 @@
+### Window 에서는 실행 안됨 -> 가상머신 내부 콘솔에서 실행 
+
+[[ CPU 부하테스트]] 
+dd if=/dev/zero of=/dev/null
+  => 성능이 좋으면 부하 발생 안됨
+
+ * vi cpu1.sh
+START =0
+END = 10000000
+while [$START -le $END]
+do
+	START=`expr $START + 1`
+done
+
+chmod +x cpu1.sh
+./cpu1.sh[-p
+
+ * vi cpu2.sh
+while true
+do
+	a=1
+done
+
+chmod +x cpu2.sh
+./cpu2.sh
+
+---------------------------------------추가
+(1) 네트워크 부하테스트
+
+* ping -s 1500 {IP주소} -f -l 30000
+
+
+(2) MEM 부하테스트
+* gcc 설치 필요 버전
+# yum -y install gcc
+# free
+# top -n 1 | grep Mem
+
+# vi mem.c
+#include<stdio.h>
+#include<dtdib.h>
+main() {
+	char *m;
+	printf("ctrl+c will terminate mem process\n");
+	while(1)
+		m = malloc(1);
+}
+# gcc -o mem mem.c
+# ls
+mem mem.c
+# ./mem
+# 메모리 사용율이 80% 넘기 전에 mem 프로그램 종료
+# free
+# top -n 1 | grep Mem
+
+* dd if=/dev/zero of=/dev/null
+
+
+(3) 디스크 부하테스트
+  (a) 쓰기 테스트 - #if: 입력파일, of: 출력파일, count: 반복횟수, bs: 블럭 사이즈
+   dd if=/dev/zero of=testfile count=1000 bs=1024k
+ 
+  (b) 읽기 테스트
+   dd if=testfile of=/dev/zero bs=1024k
