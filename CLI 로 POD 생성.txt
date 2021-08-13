@@ -1,0 +1,29 @@
+<<oc 명령어로 POD 생성>>
+
+1) 로컬PC 에 새 폴더(test) 생성 후, deploymenets 폴더에 ROOT.war 파일 복사
+
+mkdir test
+mkdir deployments
+cp C:\Users\user\git\cone-web-portal\target\ROOT.war test\deployments
+
+2) 오픈시프트 로그인 
+oc login 
+
+3) webserver31-tomcat8-openshift 이미지 import (--confirm: 이미지 변경시 업데이트 여부)
+oc import-image my-jboss-webserver-3/webserver31-tomcat8-openshift --from=registry.access.redhat.com/jboss-webserver-3/webserver31-tomcat8-openshift --confirm
+
+4) Base Image(webserver31-tomcat8-openshift:latest) 로 cone-uiux-test 라는 bildconfig 생성 
+cd test
+oc new-build webserver31-tomcat8-openshift:latest --name=cone-uiux-test --binary=true
+
+5) 현재 디렉토리에서 빌드 시작 (--follow : 빌드 로그 follow / --wait : 빌드가 완료될 때까지 기다린 후, 종료코드 return)
+oc start-build cone-uiux-test --from-dir=. --follow=true --wait=true
+
+6) 배포 
+oc new-app cone-uiux-test 
+
+7) 라우트 
+oc expose service cone-uiux
+
+8) OCP 플랫폼에서 스토리지 생성 후, 마운트 
+
