@@ -1,0 +1,17 @@
+
+- 오픈스택 Alarming 서비스(aodh)
+
+aodh alarm list 
+
+
+aodh alarm show 61ca57d6-8ac9-4100-9494-a1c42e41c892
+
+// 인스턴스 아이디
+openstack metric resource show {인스턴스 ID}
+
+// cpu_util
+openstack metric measures show {cpu_util 구분값}
+
+gnocchi measures aggregation -m cpu--reaggregation mean --aggregation mean --query server_group=96e27411-6fbf-4565-a7cc-188dd6a00b8b --resource-type instance
+
+gnocchi measures aggregation -m cpu_util --query server_group=9f610ee8-674d-4170-a206-eef69a2d6b18 --resource-type instance
