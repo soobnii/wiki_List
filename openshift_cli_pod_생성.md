@@ -35,7 +35,7 @@ oc new-app test-uiux
 
 > 7) 라우트 
 ```
-oc expose service test-uiux
+oc expose service test-uiux-svc
 ```
 
 > 8) OCP 플랫폼에서 스토리지 생성(PV) 후, 마운트 
