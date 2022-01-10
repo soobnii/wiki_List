@@ -1,12 +1,12 @@
-## OSP (OpenStack) CLI tool 설치 및 테스트
+### OSP (OpenStack) CLI tool 설치 및 테스트
 
-## 1. 도커머신에 도커서버(vm) 생성 및 구동 
+> 1. 도커머신에 도커서버(vm) 생성 및 구동 
 ``` 
 $ docker-machine create --driver virtualbox manager
 $ docker-machine start manager
 ```
 
-## 2. 통신을 위한 환경변수 셋팅
+> 2. 통신을 위한 환경변수 셋팅
 ```
 $ docker-machine env manager
 
@@ -21,7 +21,7 @@ REM Run this command to configure your shell:
 REM     @FOR /f "tokens=*" %i IN ('"C:\ProgramData\chocolatey\lib\docker-machine\bin\docker-machine.exe" env manager') DO @%i
 ```
 
-## 3. 도커 이미지 pull -> 컨테이너 구동
+> 3. 도커 이미지 pull -> 컨테이너 구동
 ** 볼륨 경로 => c는 반드시 소문자
 
 ```
@@ -29,7 +29,7 @@ $ docker pull jmcvea/openstack-client
 $ docker run -ti --rm --volume="/c/Users/user/Desktop/data:/data" jmcvea/openstack-client
 ```
 
-## 3. keystonerc 파일 생성
+> 4. keystonerc 파일 생성
 ** 오픈스택 구동에 필요한 환경변수 셋팅
 
 ```
@@ -52,7 +52,7 @@ export OS_PROJECT_DOMAIN_NAME=Default
 export OS_IDENTITY_API_VERSION=3       
 ```
 
-## 4. 확인 및 테스트 
+> 5. 확인 및 테스트 
 ```
 / # . /data/keystonerc.sh
 [root@bfe0694e5cd3 data(keystone_admin)]# openstack network list
