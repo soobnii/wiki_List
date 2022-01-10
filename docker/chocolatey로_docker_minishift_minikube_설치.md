@@ -1,11 +1,12 @@
+### chocolatey 활용
 
-# chocolatey 로 docker 설치 (virtualbox / cmder 설치)
+#### chocolatey 로 docker 설치 (virtualbox 설치)
 
 1) cmd.exe (관리자 권한으로 실행)
 ```
 systeminfo
 ```
-다음과 같은 출력이 확인되어야 함
+> 다음과 같은 출력이 확인되어야 함
 ```
 Hyper-V Requirements:
     VM Monitor Mode Extensions: Yes
@@ -15,18 +16,22 @@ Hyper-V Requirements:
 ```
 
 2) chocolatey 설치
--ssl/tls 보안 채널을 만들 수 없습니다 에러 발생 
+
+> https://chocolatey.org/install#non-administrative-install 참조<br>
+> 위 링크에 있는 내용 1개 복사해서 실행<br>
+> 만약 -ssl/tls 보안 채널을 만들 수 없습니다 에러 발생하면, 아래 링크 참조<br>
 ```
-  =>powershell 관리자로 실행 (윈도우에선 powershell로만 실행됨)
-　　https://chocolatey.org/blog/remove-support-for-old-tls-versions
-　　위 링크에 있는 내용 3개 복사해서 실행
-- https://chocolatey.org/install#non-administrative-install
-  위 링크에 있는 내용 1개 복사해서 실행
+powershell 관리자로 실행 (윈도우에선 powershell로만 실행됨)
+https://chocolatey.org/blog/remove-support-for-old-tls-versions
+위 링크에 있는 내용 3개 복사해서 실행
 ```
-- choco로 설치한 패키지 목록 보기
+
+> choco로 설치한 패키지 목록 보기
 ```
 choco list —local-only
 ```
+
+`지원되는 하이파바이저 : VirtualBox(권장), Hyper-V`
 
 3) virtualbox 설치
 ```
@@ -38,52 +43,45 @@ choco install -y virtualbox virtualbox.extensionpack
 choco install -y docker-cli docker-machine docker-compose
 ```
 
-5) (옵션) Cmder 설치 (Portable console emulator for Windows)
-```
-choco install –y cmder
-```
-
-6) docker Server 생성 - vm 생성 (생성하는 vm의 이름은 manager)
+5) docker Server 생성 - vm 생성 (생성하는 vm의 이름은 manager)
 ```
 docker-machine create --driver virtualbox manager
 ```
 
-7) vm 목록 확인
+6) vm 목록 확인
 ```
 docker-machine ls
 ```
 
-8) vm 시작/중지
+7) vm 시작/중지
 ```
 docker-machine start/stop manager
 ```
 
-9) set up the environment for the Docker client
+8) 도커 클라이언트 환경 셋팅
 ```
 docker-machine env manager
-
 ```
 
-다음과 같은 출력라인 확인후 copy&paste
+> 다음과 같은 출력라인 확인후 copy&paste
 ```
 REM Run this command to configure your shell:
-REM @FOR /f "tokens=*" %i IN ('"C:\ProgramData\chocolatey\lib\docker-machine\bin\docker-machine.exe" env manager') DO @%i  -> (예시)
-
+REM @FOR /f "tokens=*" %i IN ('"C:\ProgramData\chocolatey\lib\docker-machine\bin\docker-machine.exe" env manager') DO @%i  
+-> (예시)
 ```
 
-C:\Windows\system32> 즉, 이곳에 아래 문자열을 복사함
+> C:\Windows\system32> 즉, 이곳에 아래 문자열을 복사함
 ```
 & "C:\ProgramData\chocolatey\lib\docker-machine\bin\docker-machine.exe" env manager | Invoke-Expression
-
 ```
 
-10) docker 클라이언트/서버 버전 확인
+9) docker 클라이언트/서버 버전 확인
 ```
 docker version
 ```
 
 
-# minishift 설치
+#### chocolatey 로 minishift 설치
 
 1) https://www.openshift.org/minishift/ release 페이지에서 최신버전 다운 후 실행 
 2) C:\minishift 폴더를 만들고 이곳에 위에서 받은 압축 파일의 내용물 이동
@@ -104,7 +102,7 @@ Running
 *참고 : https://javaworld.co.kr/103
 ```
 
-# minikube 설치
+#### chocolatey 로 minikube 설치
 
 1) minkube 설치 
 ```
@@ -131,8 +129,8 @@ minikube status
         https://kubernetes.io/docs/setup/learning-environment/minikube/
 ```
 
-### docker 쉘 실행 
-1) docker machine 접속 (cmder)
+#### docker 쉘 실행 
+1) docker machine 접속
 ```
 docker-machine ssh manager
 ```
