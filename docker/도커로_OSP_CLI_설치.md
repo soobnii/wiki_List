@@ -1,4 +1,4 @@
-## OSP CLI tool 설치 및 테스트
+## OSP (OpenStack) CLI tool 설치 및 테스트
 
 ## 1. 도커머신에 도커서버(vm) 생성 및 구동 
 ``` 
